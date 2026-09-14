@@ -1,0 +1,69 @@
+---
+import AppImage from '@/components/AppImage.astro';
+import profImage from '@/assets/placeholder.jpg';
+
+const professionals = [
+  {
+    badge: 'Plano cintura fina',
+    name: 'Bibi Fitness',
+    description:
+      'Referência em fitness no Brasil, com milhões de seguidores, reconhecida por democratizar o treino em casa com leveza e consistência.',
+  },
+  {
+    badge: 'Corrida guiada',
+    name: 'Nini Oliveira',
+    description:
+      'Criadora reconhecida por unir treino, autoestima e saúde mental, com uma comunidade engajada em torno do bem-estar integral.',
+  },
+  {
+    badge: 'Go gap',
+    name: 'Bruno Leal',
+    description:
+      'Profissional de educação física com forte presença digital, conhecido pelos treinos funcionais voltados à qualidade de vida e longevidade.',
+  },
+  {
+    badge: 'Hatha yoga',
+    name: 'Pamela Otero',
+    description:
+      'Especialista em mobilidade e saúde da mulher, referência em treinos que unem flexibilidade, força e cuidado feminino.',
+  },
+  {
+    badge: 'Pilates em casa',
+    name: 'Matheus Garofalo',
+    description:
+      'Atleta e criador conhecido por conteúdos de força, hipertrofia e performance, com método acessível para diferentes níveis de treino.',
+  },
+  {
+    badge: 'MMA training',
+    name: 'Rafa Pereira',
+    description:
+      'Treinador especializado em artes marciais mistas, traz para a plataforma treinos de alta intensidade inspirados nos movimentos do MMA.',
+  },
+];
+---
+
+<section id="professionals">
+  <div>
+    <div>
+      <p>Profissionais da plataforma</p>
+      <h2>
+        Quem treina <span class="hint">com você</span>
+      </h2>
+      <p>
+        Especialistas e criadores reconhecidos guiando sua jornada — do treino à saúde mental.
+      </p>
+    </div>
+    <ul>
+      {professionals.map((professional) => (
+        <li>
+          <AppImage src={profImage} alt="" />
+          <div>
+            <span>{professional.badge}</span>
+            <h3>{professional.name}</h3>
+            <p>{professional.description}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

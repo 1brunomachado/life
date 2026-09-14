@@ -1,0 +1,45 @@
+---
+import { Dumbbell, Flower2, Utensils, Swords, Activity, Heart, HeartPulse, SportShoe, Baby, Zap } from "@lucide/astro";
+
+const productCards = [
+  { icon: Dumbbell, label: "Funcional" },
+  { icon: Flower2, label: "Yoga" },
+  { icon: Utensils, label: "Dicas de alimentação" },
+  { icon: Swords, label: "Luta" },
+  { icon: Activity, label: "Pilates" },
+  { icon: Heart, label: "Hipopressivo" },
+  { icon: HeartPulse, label: "Cardio" },
+  { icon: SportShoe, label: "Corrida" },
+  { icon: Baby, label: "Yoga para gestantes" },
+  { icon: Zap, label: "Tonificação" },
+];
+---
+
+<section id="product">
+  <div>
+    <div>
+      <p>O que é o Sesc Life</p>
+      <h2>
+        A plataforma digital de <span class="hint">saúde integral</span> do Sesc
+      </h2>
+      <p>
+        Jornadas personalizadas com especialistas reconhecidos em saúde e bem-estar, conectando anamnese inicial, agenda
+        inteligente e suporte contínuo com o cuidado do Sesc.
+      </p>
+    </div>
+    <ul>
+      {productCards.map((card) => {
+        const Icon = card.icon;
+        return (
+          <li>
+            <div>
+              <Icon aria-hidden="true" />
+            </div>
+            <h3>{card.label}</h3>
+          </li>
+        );
+      })}
+    </ul>
+    <p>Confira muitas outras experiências disponíveis na plataforma.</p>
+  </div>
+</section>

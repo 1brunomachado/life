@@ -1,0 +1,51 @@
+---
+import { ChevronDown } from '@lucide/astro';
+
+const faqItems = [
+  {
+    question: 'Como recebo o acesso após a compra?',
+    answer:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+  {
+    question: 'Quanto tempo leva para chegar o e-mail de acesso?',
+    answer:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+  {
+    question: 'Posso cancelar a qualquer momento?',
+    answer:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+  {
+    question: 'Quais formas de pagamento são aceitas?',
+    answer:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+  {
+    question: 'Como descubro qual perfil de assinatura posso contratar?',
+    answer:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+];
+---
+
+<section id="faq">
+  <div>
+    <div>
+      <p>Dúvidas</p>
+      <h2>Perguntas frequentes</h2>
+    </div>
+    <div>
+      {faqItems.map((item) => (
+        <details>
+          <summary>
+            <span>{item.question}</span>
+            <ChevronDown aria-hidden="true" />
+          </summary>
+          <p>{item.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

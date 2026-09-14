@@ -1,17 +1,53 @@
 ---
-
+import Header from "@/components/Header.astro";
+import Hero from "@/components/Hero.astro";
+import Product from "@/components/Product.astro";
+import About from "@/components/About.astro";
+import Professionals from "@/components/Professionals.astro";
+import Plans from "@/components/Plans.astro";
+import FAQ from "@/components/FAQ.astro";
+import Resolution from "@/components/Resolution.astro";
+import Footer from "@/components/Footer.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Sesc Life</title>
+
+    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}/styles.css`} />
+
+    <link rel="preload" href="font.woff2" as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:title" content="Name of Page" />
+    <meta name="description" content="Description of this page." />
+    <meta property="og:description" content="Description of this page for embeds." />
+
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}/favicon.svg`} />
+    <link rel="icon" href={`${import.meta.env.BASE_URL}/favicon.ico`} />
+
+    <meta property="og:image" content="https://example.com/embed-image.webp" />
+    <meta property="og:image:alt" content="A picture of something." />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <link rel="canonical" href="https://www.sesc-rs.com.br/life" />
+    <meta property="og:url" content="https://www.sesc-rs.com.br/life" />
+
+    <meta property="og:site_name" content="Sesc Life" />
+  </head>
+  <body>
+    <Header />
+    <Hero />
+    <Product />
+    <About />
+    <Professionals />
+    <Plans />
+    <FAQ />
+    <Resolution />
+    <Footer />
+  </body>
 </html>

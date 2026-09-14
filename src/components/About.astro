@@ -1,0 +1,33 @@
+---
+import { ChevronsRight } from "@lucide/astro";
+
+const aboutSteps = [
+  { title: "Escolha seu plano", description: "Selecione o plano que combina com seu momento de vida." },
+  { title: "Receba o acesso", description: "Em poucos minutos, seus dados chegam no seu e-mail." },
+  { title: "Comece sua jornada", description: "Preencha o questionário e siga sua trilha personalizada." },
+  { title: "Suporte técnico", description: "Esclareça dúvidas sobre a plataforma, acesso e assinatura." },
+];
+---
+
+<section id="about">
+  <div>
+    <div>
+      <p>Sobre</p>
+      <h2>
+        Tudo que você precisa para <span class="hint">cuidar de si</span>
+      </h2>
+    </div>
+    <ul>
+      {aboutSteps.map((step, index) => (
+        <li>
+          <div>
+            <span>{index + 1}.</span>
+            <ChevronsRight aria-hidden="true" />
+          </div>
+          <h3>{step.title}</h3>
+          <p>{step.description}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

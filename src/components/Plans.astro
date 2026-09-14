@@ -1,0 +1,63 @@
+---
+import { ChevronsRight } from '@lucide/astro';
+
+const periods = [
+  { id: 'mensal', label: 'Mensal' },
+  { id: 'semestral', label: 'Semestral' },
+  { id: 'anual', label: 'Anual' },
+];
+const plans = [
+  { title: 'Trabalhador do comércio', description: 'e dependentes' },
+  { title: 'Empresário do comércio', description: 'e dependentes' },
+  { title: 'Conveniado', description: 'e dependentes' },
+  { title: 'Público geral', description: 'e dependentes' },
+];
+const CTA_HREF = 'https://www.sesc-rs.com.br/life';
+const MONTHLY_PRICE = 'R$ 9,90';
+---
+
+<section id="plans">
+  <div>
+    <div>
+      <div role="tablist" aria-label="Período de assinatura">
+        {periods.map((period, index) => (
+          <button
+            role="tab"
+            id={`tab-${period.id}`}
+            aria-controls={`panel-${period.id}`}
+            aria-selected={index === 0}
+            tabindex={index === 0 ? 0 : -1}
+          >
+            {period.label}
+          </button>
+        ))}
+      </div>
+      <h2>
+        Escolha o seu <span class="hint">ritmo</span>
+      </h2>
+      <p>Valores por mês conforme o seu perfil. Quanto maior o período, menor o valor mensal.</p>
+    </div>
+
+    {periods.map((period, index) => (
+      <div role="tabpanel" id={`panel-${period.id}`} aria-labelledby={`tab-${period.id}`} hidden={index !== 0}>
+        <ul>
+          {plans.map((plan) => (
+            <li>
+              <h3>{plan.title}</h3>
+              <p>{plan.description}</p>
+              <p>
+                <strong>{MONTHLY_PRICE}</strong>/mês
+              </p>
+              <a href={CTA_HREF} target="_blank" rel="noopener">
+                Assinar agora
+                <ChevronsRight aria-hidden="true" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+
+    <p>Valores expressos em R$ por mês. Pagamento semestral e anual via cartão ou PIX.</p>
+  </div>
+</section>
