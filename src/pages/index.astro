@@ -1,4 +1,6 @@
 ---
+import "@/styles/global.css";
+import { Font } from "astro:assets";
 import Header from "@/components/Header.astro";
 import Hero from "@/components/Hero.astro";
 import Product from "@/components/Product.astro";
@@ -17,9 +19,8 @@ import Footer from "@/components/Footer.astro";
     <meta name="generator" content={Astro.generator} />
     <title>Sesc Life</title>
 
-    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}/styles.css`} />
-
-    <link rel="preload" href="font.woff2" as="font" type="font/woff2" crossorigin />
+    <Font cssVariable="--font-geist" preload />
+    <Font cssVariable="--font-source-sans-3" />
 
     <meta property="og:title" content="Name of Page" />
     <meta name="description" content="Description of this page." />
