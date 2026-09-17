@@ -1,24 +1,24 @@
 ---
-import { ChevronsRight } from '@lucide/astro';
+import { ChevronsRight } from "@lucide/astro";
 
 const periods = [
-  { id: 'mensal', label: 'Mensal' },
-  { id: 'semestral', label: 'Semestral' },
-  { id: 'anual', label: 'Anual' },
+  { id: "mensal", label: "Mensal" },
+  { id: "semestral", label: "Semestral" },
+  { id: "anual", label: "Anual" },
 ];
 const plans = [
-  { title: 'Trabalhador do comércio', description: 'e dependentes' },
-  { title: 'Empresário do comércio', description: 'e dependentes' },
-  { title: 'Conveniado', description: 'e dependentes' },
-  { title: 'Público geral', description: 'e dependentes' },
+  { title: "Trabalhador do comércio", description: "e dependentes" },
+  { title: "Empresário do comércio", description: "e dependentes" },
+  { title: "Conveniado", description: "e dependentes" },
+  { title: "Público geral", description: "e dependentes" },
 ];
-const CTA_HREF = 'https://www.sesc-rs.com.br/life';
-const MONTHLY_PRICE = 'R$ 9,90';
+const CTA_HREF = "https://www.sesc-rs.com.br/life";
+const MONTHLY_PRICE = "R$ 9,90";
 ---
 
-<section id="plans">
-  <div>
-    <div>
+<section id="plans" class="section">
+  <div class="container stack stack--gap-6">
+    <div class="stack">
       <div role="tablist" aria-label="Período de assinatura">
         {periods.map((period, index) => (
           <button
@@ -32,23 +32,21 @@ const MONTHLY_PRICE = 'R$ 9,90';
           </button>
         ))}
       </div>
-      <h2>
-        Escolha o seu <span class="hint">ritmo</span>
-      </h2>
+      <h2>Escolha o seu ritmo</h2>
       <p>Valores por mês conforme o seu perfil. Quanto maior o período, menor o valor mensal.</p>
     </div>
 
     {periods.map((period, index) => (
       <div role="tabpanel" id={`panel-${period.id}`} aria-labelledby={`tab-${period.id}`} hidden={index !== 0}>
-        <ul>
+        <ul class="plans__grid grid">
           {plans.map((plan) => (
-            <li>
+            <li class="stack stack--gap-1">
               <h3>{plan.title}</h3>
               <p>{plan.description}</p>
               <p>
                 <strong>{MONTHLY_PRICE}</strong>/mês
               </p>
-              <a href={CTA_HREF} target="_blank" rel="noopener">
+              <a class="cta" href={CTA_HREF} target="_blank" rel="noopener">
                 Assinar agora
                 <ChevronsRight aria-hidden="true" />
               </a>

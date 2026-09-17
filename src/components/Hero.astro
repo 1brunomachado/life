@@ -1,26 +1,26 @@
 ---
-import { ChevronsRight } from '@lucide/astro';
-import AppImage from '@/components/AppImage.astro';
-import heroImage from '@/assets/placeholder.jpg';
+import { ChevronsRight } from "@lucide/astro";
+import AppImage from "@/components/AppImage.astro";
+import heroImage from "@/assets/placeholder.jpg";
 
-const CTA_HREF = 'https://www.sesc-rs.com.br/life';
+const CTA_HREF = "https://www.sesc-rs.com.br/life";
 ---
 
-<section id="hero">
-	<div>
-		<div>
-			<h1>Sua saúde, <span class="hint">por inteiro</span></h1>
-			<p>
-				Mente, corpo e prevenção em uma só plataforma. Videoaulas, trilhas
-				personalizadas, agenda inteligente e integração com as unidades Sesc e Senac.
-			</p>
-			<a href={CTA_HREF} target="_blank" rel="noopener">
-				Assinar agora
-				<ChevronsRight aria-hidden="true" />
-			</a>
-		</div>
-		<div>
-			<AppImage src={heroImage} alt="" priority />
-		</div>
-	</div>
+<section id="hero" class="section">
+  <div class="hero__inner container">
+    <div class="stack">
+      <h1>Sua saúde, por inteiro</h1>
+      <p>
+        Mente, corpo e prevenção em uma só plataforma. Videoaulas, trilhas personalizadas, agenda inteligente e
+        integração com as unidades Sesc e Senac.
+      </p>
+      <a class="cta" href={CTA_HREF} target="_blank" rel="noopener">
+        Assinar agora
+        <ChevronsRight aria-hidden="true" />
+      </a>
+    </div>
+    <div class="hero__media">
+      <AppImage src={heroImage} alt="" priority />
+    </div>
+  </div>
 </section>

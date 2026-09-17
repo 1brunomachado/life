@@ -15,23 +15,21 @@ const productCards = [
 ];
 ---
 
-<section id="product">
-  <div>
-    <div>
+<section id="product" class="section">
+  <div class="container stack stack--gap-6">
+    <div class="stack">
       <p>O que é o Sesc Life</p>
-      <h2>
-        A plataforma digital de <span class="hint">saúde integral</span> do Sesc
-      </h2>
+      <h2>A plataforma digital de saúde integral do Sesc</h2>
       <p>
         Jornadas personalizadas com especialistas reconhecidos em saúde e bem-estar, conectando anamnese inicial, agenda
         inteligente e suporte contínuo com o cuidado do Sesc.
       </p>
     </div>
-    <ul>
+    <ul class="product__grid grid">
       {productCards.map((card) => {
         const Icon = card.icon;
         return (
-          <li>
+          <li class="product__card stack stack--gap-2">
             <div>
               <Icon aria-hidden="true" />
             </div>

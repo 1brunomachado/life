@@ -1,18 +1,16 @@
 ---
-import { ChevronsRight } from '@lucide/astro';
+import { ChevronsRight } from "@lucide/astro";
 
-const CTA_HREF = 'https://www.sesc-rs.com.br/life';
+const CTA_HREF = "https://www.sesc-rs.com.br/life";
 ---
 
-<section id="resolution">
-  <div>
-    <h2>
-      Sua jornada de saúde integral <span class="hint">começa hoje</span>
-    </h2>
+<section id="resolution" class="section">
+  <div class="container stack">
+    <h2>Sua jornada de saúde integral começa hoje</h2>
     <p>
       Trilhas personalizadas, profissionais reconhecidos e tudo o que você precisa para cuidar do seu corpo e mente.
     </p>
-    <a href={CTA_HREF} target="_blank" rel="noopener">
+    <a class="cta" href={CTA_HREF} target="_blank" rel="noopener">
       Assinar agora
       <ChevronsRight aria-hidden="true" />
     </a>

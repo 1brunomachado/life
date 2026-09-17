@@ -1,45 +1,45 @@
 ---
-import { ChevronDown } from '@lucide/astro';
+import { ChevronDown } from "@lucide/astro";
 
 const faqItems = [
   {
-    question: 'Como recebo o acesso após a compra?',
+    question: "Como recebo o acesso após a compra?",
     answer:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
-    question: 'Quanto tempo leva para chegar o e-mail de acesso?',
+    question: "Quanto tempo leva para chegar o e-mail de acesso?",
     answer:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
-    question: 'Posso cancelar a qualquer momento?',
+    question: "Posso cancelar a qualquer momento?",
     answer:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
-    question: 'Quais formas de pagamento são aceitas?',
+    question: "Quais formas de pagamento são aceitas?",
     answer:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
-    question: 'Como descubro qual perfil de assinatura posso contratar?',
+    question: "Como descubro qual perfil de assinatura posso contratar?",
     answer:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
 ];
 ---
 
-<section id="faq">
-  <div>
-    <div>
+<section id="faq" class="section">
+  <div class="container stack stack--gap-6">
+    <div class="stack">
       <p>Dúvidas</p>
       <h2>Perguntas frequentes</h2>
     </div>
-    <div>
+    <div class="stack">
       {faqItems.map((item) => (
         <details>
-          <summary>
+          <summary class="split">
             <span>{item.question}</span>
             <ChevronDown aria-hidden="true" />
           </summary>

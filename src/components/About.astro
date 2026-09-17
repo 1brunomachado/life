@@ -9,18 +9,16 @@ const aboutSteps = [
 ];
 ---
 
-<section id="about">
-  <div>
-    <div>
+<section id="about" class="section">
+  <div class="container stack stack--gap-6">
+    <div class="stack">
       <p>Sobre</p>
-      <h2>
-        Tudo que você precisa para <span class="hint">cuidar de si</span>
-      </h2>
+      <h2>Tudo que você precisa para cuidar de si</h2>
     </div>
-    <ul>
+    <ul class="about__grid grid">
       {aboutSteps.map((step, index) => (
-        <li>
-          <div>
+        <li class="stack stack--gap-1">
+          <div class="split">
             <span>{index + 1}.</span>
             <ChevronsRight aria-hidden="true" />
           </div>
