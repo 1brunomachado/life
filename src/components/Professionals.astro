@@ -1,4 +1,5 @@
 ---
+import { ChevronLeft, ChevronRight } from "@lucide/astro";
 import AppImage from "@/components/AppImage.astro";
 import profImage from "@/assets/placeholder.jpg";
 
@@ -46,20 +47,84 @@ const professionals = [
   <div class="container stack stack--gap-6">
     <div class="stack">
       <p>Profissionais da plataforma</p>
-      <h2>Quem treina com você</h2>
+      <h2 id="professionals-heading">Quem treina com você</h2>
       <p>Especialistas e criadores reconhecidos guiando sua jornada — do treino à saúde mental.</p>
     </div>
-    <ul class="professionals__grid grid">
-      {professionals.map((professional) => (
-        <li>
-          <AppImage src={profImage} alt="" />
-          <div class="stack stack--gap-1">
-            <span>{professional.badge}</span>
-            <h3>{professional.name}</h3>
-            <p>{professional.description}</p>
-          </div>
-        </li>
-      ))}
-    </ul>
+    <div class="stack">
+      <div
+        class="professionals__viewport"
+        role="region"
+        aria-roledescription="carousel"
+        aria-labelledby="professionals-heading"
+        data-professionals-embla
+      >
+        <ul class="professionals__grid">
+          {professionals.map((professional, index) => (
+            <li
+              class="professionals__slide"
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${index + 1} de ${professionals.length}`}
+            >
+              <AppImage class="professionals__image" src={profImage} alt="" />
+              <div class="stack stack--gap-1">
+                <span>{professional.badge}</span>
+                <h3>{professional.name}</h3>
+                <p>{professional.description}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="professionals__controls">
+        <button
+          type="button"
+          class="professionals__control"
+          data-professionals-prev
+          aria-label="Profissional anterior"
+          disabled
+        >
+          <ChevronLeft aria-hidden="true" />
+        </button>
+        <button type="button" class="professionals__control" data-professionals-next aria-label="Próximo profissional">
+          <ChevronRight aria-hidden="true" />
+        </button>
+      </div>
+    </div>
   </div>
 </section>
+
+<script>
+  import EmblaCarousel from "embla-carousel";
+
+  const viewport = document.querySelector<HTMLElement>("[data-professionals-embla]");
+
+  if (viewport) {
+    const prevButton = document.querySelector<HTMLButtonElement>("[data-professionals-prev]");
+    const nextButton = document.querySelector<HTMLButtonElement>("[data-professionals-next]");
+
+    const emblaApi = EmblaCarousel(viewport, {
+      align: "start",
+      containScroll: "trimSnaps",
+      breakpoints: {
+        "(min-width: 992px)": { active: false },
+        "(prefers-reduced-motion: reduce)": { duration: 0 },
+      },
+    });
+
+    const syncControls = () => {
+      if (prevButton) prevButton.disabled = !emblaApi.canScrollPrev();
+      if (nextButton) nextButton.disabled = !emblaApi.canScrollNext();
+    };
+
+    prevButton?.addEventListener("click", () => emblaApi.scrollPrev());
+    nextButton?.addEventListener("click", () => emblaApi.scrollNext());
+
+    emblaApi.on("pointerDown", () => viewport.classList.add("is-dragging"));
+    emblaApi.on("pointerUp", () => viewport.classList.remove("is-dragging"));
+    emblaApi.on("select", syncControls);
+    emblaApi.on("reInit", syncControls);
+
+    syncControls();
+  }
+</script>

@@ -276,6 +276,62 @@ button, input:where([type='button'], [type='reset'], [type='submit']),
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.professionals__viewport {
+  overflow: hidden;
+}
+
+.professionals__viewport.is-dragging {
+  cursor: grabbing;
+}
+
+.professionals__grid {
+  display: flex;
+  gap: var(--space-4);
+  touch-action: pan-y pinch-zoom;
+}
+
+.professionals__slide {
+  flex: 0 0 auto;
+  width: min(384px, 100%);
+  min-width: 0;
+}
+
+.professionals__image {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.professionals__controls {
+  display: flex;
+  gap: var(--space-2);
+}
+
+@media (hover: hover) and (pointer: fine) and (max-width: 991.98px) {
+  .professionals__viewport {
+    cursor: grab;
+  }
+}
+
+@media (scripting: none) and (max-width: 991.98px) {
+  .professionals__viewport {
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x mandatory;
+  }
+
+  .professionals__grid {
+    touch-action: auto;
+  }
+
+  .professionals__slide {
+    scroll-snap-align: start;
+  }
+
+  .professionals__controls {
+    display: none;
+  }
+}
+
 @media (min-width: 640px) {
   .product__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -311,8 +367,22 @@ button, input:where([type='button'], [type='reset'], [type='submit']),
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
+  .professionals__viewport {
+    overflow: visible;
+  }
+
   .professionals__grid {
+    display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-8);
+  }
+
+  .professionals__slide {
+    width: auto;
+  }
+
+  .professionals__controls {
+    display: none;
   }
 
   .plans__grid {
