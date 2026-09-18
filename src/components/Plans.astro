@@ -1,32 +1,64 @@
 ---
 import { ChevronsRight } from "@lucide/astro";
 
+const CTA_HREF = "https://www.sesc-rs.com.br/life";
+const DEFAULT_PERIOD = "anual";
+
 const periods = [
   { id: "mensal", label: "Mensal" },
   { id: "semestral", label: "Semestral" },
   { id: "anual", label: "Anual" },
+] as const;
+
+type PeriodId = (typeof periods)[number]["id"];
+
+interface Plan {
+  title: string;
+  description: string;
+  prices: Record<PeriodId, string>;
+}
+
+const plans: Plan[] = [
+  {
+    title: "Trabalhador do comércio",
+    description: "e dependentes",
+    prices: { mensal: "12,90", semestral: "10,90", anual: "9,90" },
+  },
+  {
+    title: "Empresário do comércio",
+    description: "e dependentes",
+    prices: { mensal: "13,55", semestral: "11,45", anual: "10,40" },
+  },
+  {
+    title: "Conveniado",
+    description: "e dependentes",
+    prices: { mensal: "25,90", semestral: "21,90", anual: "19,90" },
+  },
+  {
+    title: "Público geral",
+    description: "e dependentes",
+    prices: { mensal: "29,90", semestral: "27,90", anual: "25,90" },
+  },
 ];
-const plans = [
-  { title: "Trabalhador do comércio", description: "e dependentes" },
-  { title: "Empresário do comércio", description: "e dependentes" },
-  { title: "Conveniado", description: "e dependentes" },
-  { title: "Público geral", description: "e dependentes" },
-];
-const CTA_HREF = "https://www.sesc-rs.com.br/life";
-const MONTHLY_PRICE = "R$ 9,90";
 ---
 
 <section id="plans" class="section">
   <div class="container stack stack--gap-6">
     <div class="stack">
-      <div role="tablist" aria-label="Período de assinatura">
-        {periods.map((period, index) => (
+      <div
+        class="plans__periods"
+        data-plans-tablist
+        role="tablist"
+        aria-label="Período de assinatura"
+      >
+        {periods.map((period) => (
           <button
+            type="button"
             role="tab"
             id={`tab-${period.id}`}
             aria-controls={`panel-${period.id}`}
-            aria-selected={index === 0}
-            tabindex={index === 0 ? 0 : -1}
+            aria-selected={period.id === DEFAULT_PERIOD}
+            tabindex={period.id === DEFAULT_PERIOD ? 0 : -1}
           >
             {period.label}
           </button>
@@ -36,15 +68,21 @@ const MONTHLY_PRICE = "R$ 9,90";
       <p>Valores por mês conforme o seu perfil. Quanto maior o período, menor o valor mensal.</p>
     </div>
 
-    {periods.map((period, index) => (
-      <div role="tabpanel" id={`panel-${period.id}`} aria-labelledby={`tab-${period.id}`} hidden={index !== 0}>
+    {periods.map((period) => (
+      <div
+        class="plans__panel"
+        role="tabpanel"
+        id={`panel-${period.id}`}
+        aria-labelledby={`tab-${period.id}`}
+        hidden={period.id !== DEFAULT_PERIOD}
+      >
         <ul class="plans__grid grid">
           {plans.map((plan) => (
             <li class="stack stack--gap-1">
               <h3>{plan.title}</h3>
               <p>{plan.description}</p>
               <p>
-                <strong>{MONTHLY_PRICE}</strong>/mês
+                <strong>R$&nbsp;{plan.prices[period.id]}</strong>/mês
               </p>
               <a class="cta" href={CTA_HREF} target="_blank" rel="noopener">
                 Assinar agora
@@ -59,3 +97,76 @@ const MONTHLY_PRICE = "R$ 9,90";
     <p>Valores expressos em R$ por mês. Pagamento semestral e anual via cartão ou PIX.</p>
   </div>
 </section>
+
+<script>
+  const tablist = document.querySelector<HTMLElement>("[data-plans-tablist]");
+
+  if (tablist) {
+    const tabs = getTabs(tablist);
+    tablist.addEventListener("click", (event) => onTablistClick(event, tabs));
+    tablist.addEventListener("keydown", (event) => onTablistKeydown(event, tabs));
+  }
+
+  function getTabs(tablist: HTMLElement): HTMLButtonElement[] {
+    return Array.from(tablist.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+  }
+
+  function getPanel(tab: HTMLButtonElement): HTMLElement | null {
+    return document.getElementById(tab.getAttribute("aria-controls") ?? "");
+  }
+
+  function setTabSelected(tab: HTMLButtonElement, isSelected: boolean): void {
+    tab.setAttribute("aria-selected", String(isSelected));
+    tab.tabIndex = isSelected ? 0 : -1;
+  }
+
+  function togglePanel(tab: HTMLButtonElement, isSelected: boolean): void {
+    const panel = getPanel(tab);
+    if (panel) panel.hidden = !isSelected;
+  }
+
+  function activateTab(tabs: HTMLButtonElement[], tab: HTMLButtonElement): void {
+    tabs.forEach((current) => {
+      const isSelected = current === tab;
+      setTabSelected(current, isSelected);
+      togglePanel(current, isSelected);
+    });
+  }
+
+  function focusTabAt(tabs: HTMLButtonElement[], index: number): void {
+    tabs[(index + tabs.length) % tabs.length].focus();
+  }
+
+  function onTablistClick(event: MouseEvent, tabs: HTMLButtonElement[]): void {
+    const tab = (event.target as HTMLElement).closest<HTMLButtonElement>('[role="tab"]');
+    if (tab) activateTab(tabs, tab);
+  }
+
+  function onTablistKeydown(event: KeyboardEvent, tabs: HTMLButtonElement[]): void {
+    const index = tabs.indexOf(document.activeElement as HTMLButtonElement);
+    if (index === -1) return;
+    switch (event.key) {
+      case "ArrowRight":
+        event.preventDefault();
+        focusTabAt(tabs, index + 1);
+        break;
+      case "ArrowLeft":
+        event.preventDefault();
+        focusTabAt(tabs, index - 1);
+        break;
+      case "Home":
+        event.preventDefault();
+        focusTabAt(tabs, 0);
+        break;
+      case "End":
+        event.preventDefault();
+        focusTabAt(tabs, tabs.length - 1);
+        break;
+      case "Enter":
+      case " ":
+        event.preventDefault();
+        activateTab(tabs, tabs[index]);
+        break;
+    }
+  }
+</script>

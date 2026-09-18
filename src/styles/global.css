@@ -309,6 +309,16 @@ button, input:where([type='button'], [type='reset'], [type='submit']),
   gap: var(--space-2);
 }
 
+.plans__periods {
+  display: inline-flex;
+  position: relative;
+  gap: var(--space-2);
+}
+
+.plans__panel strong {
+  font-variant-numeric: tabular-nums;
+}
+
 @media (hover: hover) and (pointer: fine) and (max-width: 991.98px) {
   .professionals__viewport {
     cursor: grab;
